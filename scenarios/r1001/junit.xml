@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="20" time="0.140" timestamp="2026-11-02T11:42:05.192013+01:00" hostname="vm"><testcase classname="tests.test_alarms" name="test_alarm_after_three_consecutive_values_above_threshold" time="0.000" /><testcase classname="tests.test_alarms" name="test_value_equal_to_threshold_does_not_trigger" time="0.000" /><testcase classname="tests.test_alarms" name="test_single_low_value_breaks_the_window" time="0.000" /><testcase classname="tests.test_config" name="test_load_default_settings" time="0.001" /><testcase classname="tests.test_debounce" name="test_debounce_switches_after_hold_time" time="0.000" /><testcase classname="tests.test_debounce" name="test_debounce_ignores_short_glitch_real_clock" time="0.051" /><testcase classname="tests.test_dedup" name="test_dedupe_keeps_first_occurrence_and_order" time="0.000" /><testcase classname="tests.test_dedup" name="test_dedupe_performance_budget" time="0.006" /><testcase classname="tests.test_parser" name="test_parse_frame_celsius" time="0.000" /><testcase classname="tests.test_parser" name="test_parse_frame_fahrenheit_is_normalized" time="0.000" /><testcase classname="tests.test_parser" name="test_parse_frame_rejects_short_frame" time="0.000" /><testcase classname="tests.test_parser" name="test_parse_batch_skips_empty_lines" time="0.000" /><testcase classname="tests.test_pipeline" name="test_pipeline_end_to_end" time="0.001" /><testcase classname="tests.test_units" name="test_c_to_f_freezing_and_boiling" time="0.000"><failure message="assert 57.6 == 32&#10; +  where 57.6 = c_to_f(0)">def test_c_to_f_freezing_and_boiling():
+&gt;       assert c_to_f(0) == 32
+E       assert 57.6 == 32
+E        +  where 57.6 = c_to_f(0)
+
+tests/test_units.py:7: AssertionError</failure></testcase><testcase classname="tests.test_units" name="test_f_to_c_roundtrip" time="0.001"><failure message="assert -25.77777777777778 == -40 ± 4.0e-05&#10;  &#10;  comparison failed&#10;  Obtained: -25.77777777777778&#10;  Expected: -40 ± 4.0e-05">def test_f_to_c_roundtrip():
+        for c in (-40, 0, 21.5, 100):
+&gt;           assert f_to_c(c_to_f(c)) == pytest.approx(c)
+E           assert -25.77777777777778 == -40 ± 4.0e-05
+E             
+E             comparison failed
+E             Obtained: -25.77777777777778
+E             Expected: -40 ± 4.0e-05
+
+tests/test_units.py:13: AssertionError</failure></testcase><testcase classname="tests.test_units" name="test_kpa_to_bar" time="0.000" /><testcase classname="tests.test_units" name="test_normalize_temperature[25-C-25]" time="0.001" /><testcase classname="tests.test_units" name="test_normalize_temperature[77-F-25]" time="0.000" /><testcase classname="tests.test_units" name="test_normalize_temperature[298.15-K-25]" time="0.000" /><testcase classname="tests.test_units" name="test_normalize_rejects_unknown_unit" time="0.000" /></testsuite></testsuites>

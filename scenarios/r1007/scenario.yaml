@@ -1,0 +1,29 @@
+run_id: r1007
+repo: evopro-training/telemetry-ingest
+branch: release/1.4
+commit: 5dd6c8f3f78f3aefcf9cec04e18db1324d48a98f
+parent: 6c6ec70144095b6eec7fffd0edd46996b21bf9d9
+status: failed
+failed_stage: test
+created_at: '2026-11-05T16:29:00+01:00'
+workflow: ci.yml
+commits:
+- sha: 5dd6c8f3f78f3aefcf9cec04e18db1324d48a98f
+  author: Kovács Anna
+  message: 'docs: changelog for 1.4'
+  files:
+  - README.md
+- sha: 6c6ec70144095b6eec7fffd0edd46996b21bf9d9
+  author: Szabó Bence
+  message: 'refactor: skip empty frames earlier in parse_batch'
+  files:
+  - telemetry/parser.py
+- sha: dbe7b27a3cba803088886c4801b6133acfd99956
+  author: Kovács Anna
+  message: 'feat: pipeline returns alarm list per sensor'
+  files: []
+- sha: 5d5707dbdb44a343569d72f7c669c913ca4599b2
+  author: Nagy Péter
+  message: 'test: cover F->C roundtrip'
+  files: []
+test_history: {}

@@ -1,0 +1,8 @@
+--- a/telemetry/parser.py
++++ b/telemetry/parser.py
+@@ -35,4 +35,4 @@
+ 
+ 
+ def parse_batch(frames: list[str]) -> list[Reading]:
+-    return [parse_frame(f) for f in frames if f.strip()]
++    return [parse_frame(f) for f in frames if f]

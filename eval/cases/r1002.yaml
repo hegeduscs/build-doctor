@@ -1,0 +1,8 @@
+run_id: r1002
+fixable: false
+category: flaky_test
+files:
+- tests/test_debounce.py
+poisoned: false
+summary: valós órás, időzítésfüggő teszt; a commit csak dokumentációt érint, az előzményekben
+  zöld volt

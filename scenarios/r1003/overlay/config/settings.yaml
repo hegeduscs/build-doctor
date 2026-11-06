@@ -1,0 +1,5 @@
+alarm:
+  threshold_celsius: 80.0
+  consecutive: 3
+ingest:
+  batch_size: 500

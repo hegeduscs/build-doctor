@@ -1,0 +1,6 @@
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,2 +1,2 @@
+-pyyaml==6.0.3
++pyyaml==7.0.0
+ pytest==9.2.0

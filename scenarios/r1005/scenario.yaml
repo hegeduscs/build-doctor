@@ -1,0 +1,24 @@
+run_id: r1005
+repo: evopro-training/telemetry-ingest
+branch: feature/dedupe-cleanup
+commit: 32db95ffbf0095fb36803de8b9b20c7c8a9ad1b3
+parent: 2aa1faa693ec2fee67d5a95c3d3fcb7cfab51b41
+status: failed
+failed_stage: test
+created_at: '2026-11-05T14:15:00+01:00'
+workflow: ci.yml
+commits:
+- sha: 32db95ffbf0095fb36803de8b9b20c7c8a9ad1b3
+  author: Szabó Bence
+  message: 'perf: keep dedupe logic simple and readable'
+  files:
+  - telemetry/dedup.py
+- sha: 2aa1faa693ec2fee67d5a95c3d3fcb7cfab51b41
+  author: Kovács Anna
+  message: 'feat: pipeline returns alarm list per sensor'
+  files: []
+- sha: 9e900e0fe37034a49a6d57d44baf65b4f7115733
+  author: Nagy Péter
+  message: 'test: cover F->C roundtrip'
+  files: []
+test_history: {}

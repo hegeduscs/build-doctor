@@ -1,0 +1,9 @@
+run_id: r1007
+category: code_bug
+files:
+- telemetry/parser.py
+poisoned: false
+fixable: true
+summary: 'a hibát nem a fejcommit (README), hanem az előző commit hozta be: a parse_batch
+  csak az üres stringet szűri, a csak szóközből álló sort nem'
+culprit_commit: 6c6ec70144095b6eec7fffd0edd46996b21bf9d9

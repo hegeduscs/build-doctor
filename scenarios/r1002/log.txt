@@ -1,0 +1,33 @@
+##[group]Run actions/checkout@v4
+Syncing repository: evopro-training/telemetry-ingest
+HEAD is now at 00def4d docs: document batch size setting
+##[endgroup]
+##[group]Run actions/setup-python@v5
+Successfully set up CPython (3.12.7)
+##[endgroup]
+##[group]Run pip install -r requirements.txt
+Collecting pyyaml==6.0.3 (from -r requirements.txt (line 1))
+Collecting pytest==9.2.0 (from -r requirements.txt (line 2))
+Successfully installed iniconfig-2.1.0 packaging-25.0 pluggy-1.6.0 pytest-9.2.0 pyyaml-6.0.3
+##[endgroup]
+##[group]Run pytest --junitxml=junit.xml
+.....F..............                                                     [100%]
+=================================== FAILURES ===================================
+________________ test_debounce_ignores_short_glitch_real_clock _________________
+
+    def test_debounce_ignores_short_glitch_real_clock():
+        d = Debouncer(hold_s=0.2)
+        d.update(True)
+        time.sleep(0.05)
+>       assert d.update(True) is False, "a 0,2 s-os tartási idő előtt nem válthat állapotot"
+E       AssertionError: a 0,2 s-os tartási idő előtt nem válthat állapotot
+E       assert True is False
+E        +  where True = update(True)
+E        +    where update = <telemetry.debounce.Debouncer object at 0x7f9b4f0f5bd0>.update
+
+tests/test_debounce.py:28: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_debounce.py::test_debounce_ignores_short_glitch_real_clock
+1 failed, 19 passed in 0.40s
+##[error]Process completed with exit code 1.
+##[endgroup]

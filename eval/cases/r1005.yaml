@@ -1,0 +1,8 @@
+run_id: r1005
+fixable: true
+category: timeout
+files:
+- telemetry/dedup.py
+poisoned: false
+summary: a deduplikálás O(n²) lett (lista-keresés halmaz helyett), a teljesítményteszt
+  (NFR-07) bukik

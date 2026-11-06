@@ -1,0 +1,9 @@
+run_id: r1009
+category: code_bug
+files:
+- tests/test_units.py
+poisoned: false
+fixable: false
+needs_human: true
+summary: 'a TESZT hibás: lebegőpontos értéket pontos egyenlőséggel hasonlít; a javítás
+  a teszt módosítása lenne, amit az agent nem tehet meg – emberi döntés kell'

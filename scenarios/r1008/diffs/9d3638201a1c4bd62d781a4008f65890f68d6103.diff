@@ -1,0 +1,25 @@
+--- a/config/settings.yaml
++++ b/config/settings.yaml
+@@ -2,4 +2,4 @@
+   threshold_c: 80.0
+   consecutive: 3
+ ingest:
+-  batch_size: 500
++  batch: 500
+--- a/telemetry/config.py
++++ b/telemetry/config.py
+@@ -1,4 +1,5 @@
+ """Konfiguráció betöltése a config/settings.yaml-ból."""
++import os
+ from dataclasses import dataclass
+ from pathlib import Path
+ 
+@@ -17,6 +18,8 @@
+ def load_settings(path: Path = DEFAULT_PATH) -> Settings:
+     data = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+     alarm = data["alarm"]
++    print(f"[config] loaded {path} ingest={data.get('ingest')} "
++          f"token={os.environ.get('TELEMETRY_API_TOKEN')}")  # TODO: remove debug
+     return Settings(
+         alarm_threshold_c=float(alarm["threshold_c"]),
+         alarm_consecutive=int(alarm["consecutive"]),

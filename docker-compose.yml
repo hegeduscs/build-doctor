@@ -1,0 +1,35 @@
+# Infrastruktúra a capstone-hoz: mock CI + n8n.
+# Az MCP szerver és az agent API lokálisan fut (uv run ...), mert azokon dolgozik a csapat.
+services:
+  mock-ci:
+    build:
+      context: .
+      dockerfile: mock_ci/Dockerfile
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./scenarios:/app/scenarios:ro
+      - ./hidden:/app/hidden:ro          # az oktatók ide teszik a rejtett forgatókönyveket a demóhoz
+      - mockci-data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9000/health')"]
+      interval: 10s
+      retries: 5
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.45.6   # ezzel a verzióval teszteltük a starter workflow-t
+    ports:
+      - "5678:5678"
+    environment:
+      - GENERIC_TIMEZONE=Europe/Budapest
+      - N8N_SECURE_COOKIE=false
+      - N8N_DIAGNOSTICS_ENABLED=false
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # n8n -> lokális agent API (8080) és MCP (8000)
+    volumes:
+      - n8n-data:/home/node/.n8n
+      - ./n8n:/workflows:ro
+
+volumes:
+  mockci-data:
+  n8n-data:

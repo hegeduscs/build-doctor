@@ -1,0 +1,11 @@
+--- a/telemetry/alarms.py
++++ b/telemetry/alarms.py
+@@ -17,7 +17,7 @@
+         self._window.append(reading.value_c)
+         if len(self._window) < self.consecutive:
+             return False
+-        return all(v > self.threshold_c for v in self._window)
++        return all(v >= self.threshold_c for v in self._window)
+ 
+     def reset(self) -> None:
+         self._window.clear()

@@ -1,0 +1,16 @@
+--- a/telemetry/dedup.py
++++ b/telemetry/dedup.py
+@@ -4,12 +4,9 @@
+ 
+ def dedupe(readings: list[Reading]) -> list[Reading]:
+     """Megtartja az első előfordulást, a sorrendet megőrzi. O(n)."""
+-    seen: set[tuple[str, int]] = set()
+     out: list[Reading] = []
+     for r in readings:
+-        key = (r.sensor_id, r.ts)
+-        if key in seen:
++        if any(o.sensor_id == r.sensor_id and o.ts == r.ts for o in out):
+             continue
+-        seen.add(key)
+         out.append(r)
+     return out

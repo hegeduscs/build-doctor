@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="20" time="0.129" timestamp="2026-11-02T11:42:06.364639+01:00" hostname="vm"><testcase classname="tests.test_alarms" name="test_alarm_after_three_consecutive_values_above_threshold" time="0.000" /><testcase classname="tests.test_alarms" name="test_value_equal_to_threshold_does_not_trigger" time="0.000" /><testcase classname="tests.test_alarms" name="test_single_low_value_breaks_the_window" time="0.000" /><testcase classname="tests.test_config" name="test_load_default_settings" time="0.001"><failure message="KeyError: 'threshold_c'">def test_load_default_settings():
+&gt;       s = load_settings()
+            ^^^^^^^^^^^^^^^
+
+tests/test_config.py:5: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/runner/work/telemetry-ingest/telemetry-ingest/config/settings.yaml')
+
+    def load_settings(path: Path = DEFAULT_PATH) -&gt; Settings:
+        data = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+        alarm = data["alarm"]
+        return Settings(
+&gt;           alarm_threshold_c=float(alarm["threshold_c"]),
+                                    ^^^^^^^^^^^^^^^^^^^^
+            alarm_consecutive=int(alarm["consecutive"]),
+            batch_size=int(data["ingest"]["batch_size"]),
+        )
+E       KeyError: 'threshold_c'
+
+telemetry/config.py:21: KeyError</failure></testcase><testcase classname="tests.test_debounce" name="test_debounce_switches_after_hold_time" time="0.000" /><testcase classname="tests.test_debounce" name="test_debounce_ignores_short_glitch_real_clock" time="0.050" /><testcase classname="tests.test_dedup" name="test_dedupe_keeps_first_occurrence_and_order" time="0.000" /><testcase classname="tests.test_dedup" name="test_dedupe_performance_budget" time="0.007" /><testcase classname="tests.test_parser" name="test_parse_frame_celsius" time="0.000" /><testcase classname="tests.test_parser" name="test_parse_frame_fahrenheit_is_normalized" time="0.000" /><testcase classname="tests.test_parser" name="test_parse_frame_rejects_short_frame" time="0.000" /><testcase classname="tests.test_parser" name="test_parse_batch_skips_empty_lines" time="0.000" /><testcase classname="tests.test_pipeline" name="test_pipeline_end_to_end" time="0.001"><failure message="KeyError: 'threshold_c'">def test_pipeline_end_to_end():
+        frames = [
+            "S-1;81;C;1", "S-1;82;C;2", "S-1;83;C;3",
+            "S-2;20;C;1", "S-2;20;C;1",          # duplikátum
+            "S-3;190;F;1", "S-3;190;F;2", "S-3;190;F;3",  # 87,8 °C
+        ]
+&gt;       out = process(frames, load_settings())
+                              ^^^^^^^^^^^^^^^
+
+tests/test_pipeline.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('/home/runner/work/telemetry-ingest/telemetry-ingest/config/settings.yaml')
+
+    def load_settings(path: Path = DEFAULT_PATH) -&gt; Settings:
+        data = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+        alarm = data["alarm"]
+        return Settings(
+&gt;           alarm_threshold_c=float(alarm["threshold_c"]),
+                                    ^^^^^^^^^^^^^^^^^^^^
+            alarm_consecutive=int(alarm["consecutive"]),
+            batch_size=int(data["ingest"]["batch_size"]),
+        )
+E       KeyError: 'threshold_c'
+
+telemetry/config.py:21: KeyError</failure></testcase><testcase classname="tests.test_units" name="test_c_to_f_freezing_and_boiling" time="0.000" /><testcase classname="tests.test_units" name="test_f_to_c_roundtrip" time="0.000" /><testcase classname="tests.test_units" name="test_kpa_to_bar" time="0.000" /><testcase classname="tests.test_units" name="test_normalize_temperature[25-C-25]" time="0.001" /><testcase classname="tests.test_units" name="test_normalize_temperature[77-F-25]" time="0.000" /><testcase classname="tests.test_units" name="test_normalize_temperature[298.15-K-25]" time="0.000" /><testcase classname="tests.test_units" name="test_normalize_rejects_unknown_unit" time="0.000" /></testsuite></testsuites>

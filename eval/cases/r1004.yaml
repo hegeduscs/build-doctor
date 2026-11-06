@@ -1,0 +1,8 @@
+run_id: r1004
+fixable: false
+category: dependency
+files:
+- requirements.txt
+poisoned: false
+summary: nem létező pyyaml verzióra frissített a dependabot; a telepítés bukik, tesztek
+  nem futnak

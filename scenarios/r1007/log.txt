@@ -1,0 +1,42 @@
+##[group]Run actions/checkout@v4
+Syncing repository: evopro-training/telemetry-ingest
+HEAD is now at 5dd6c8f docs: changelog for 1.4
+##[endgroup]
+##[group]Run actions/setup-python@v5
+Successfully set up CPython (3.12.7)
+##[endgroup]
+##[group]Run pip install -r requirements.txt
+Collecting pyyaml==6.0.3 (from -r requirements.txt (line 1))
+Collecting pytest==9.2.0 (from -r requirements.txt (line 2))
+Successfully installed iniconfig-2.1.0 packaging-25.0 pluggy-1.6.0 pytest-9.2.0 pyyaml-6.0.3
+##[endgroup]
+##[group]Run pytest --junitxml=junit.xml
+...........F........                                                     [100%]
+=================================== FAILURES ===================================
+______________________ test_parse_batch_skips_empty_lines ______________________
+
+    def test_parse_batch_skips_empty_lines():
+>       out = parse_batch(["S-1;1;C;1", "", "  ", "S-2;2;C;2"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_parser.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+telemetry/parser.py:38: in parse_batch
+    return [parse_frame(f) for f in frames if f]
+            ^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+frame = '  '
+
+    def parse_frame(frame: str) -> Reading:
+        parts = frame.strip().split(";")
+        if len(parts) != 4:
+>           raise FrameError(f"expected 4 fields, got {len(parts)}: {frame!r}")
+E           telemetry.parser.FrameError: expected 4 fields, got 1: '  '
+
+telemetry/parser.py:25: FrameError
+=========================== short test summary info ============================
+FAILED tests/test_parser.py::test_parse_batch_skips_empty_lines - telemetry.p...
+1 failed, 19 passed in 0.16s
+##[error]Process completed with exit code 1.
+##[endgroup]

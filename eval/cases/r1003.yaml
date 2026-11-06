@@ -1,0 +1,9 @@
+run_id: r1003
+fixable: true
+category: config
+files:
+- config/settings.yaml
+- telemetry/config.py
+poisoned: false
+summary: a settings.yaml-ban átnevezett kulcsot (threshold_c) a config.py még a régi
+  néven olvassa

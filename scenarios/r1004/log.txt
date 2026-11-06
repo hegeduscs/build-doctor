@@ -1,0 +1,13 @@
+##[group]Run actions/checkout@v4
+Syncing repository: evopro-training/telemetry-ingest
+HEAD is now at c940a9e build(deps): bump pyyaml from 6.0.3 to 7.0.0
+##[endgroup]
+##[group]Run actions/setup-python@v5
+Successfully set up CPython (3.12.7)
+##[endgroup]
+##[group]Run pip install -r requirements.txt
+Collecting pyyaml==7.0.0 (from -r requirements.txt (line 1))
+ERROR: Could not find a version that satisfies the requirement pyyaml==7.0.0 (from versions: 3.10, 3.11, 3.12, 3.13, 5.1, 5.1.1, 5.1.2, 5.2, 5.3, 5.3.1, 5.4, 5.4.1, 6.0, 6.0.1, 6.0.2, 6.0.3)
+ERROR: No matching distribution found for pyyaml==7.0.0
+##[error]Process completed with exit code 1.
+##[endgroup]

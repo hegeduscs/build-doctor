@@ -1,0 +1,41 @@
+##[group]Run actions/checkout@v4
+Syncing repository: evopro-training/telemetry-ingest
+HEAD is now at c79fe68 refactor: simplify temperature conversion
+##[endgroup]
+##[group]Run actions/setup-python@v5
+Successfully set up CPython (3.12.7)
+##[endgroup]
+##[group]Run pip install -r requirements.txt
+Collecting pyyaml==6.0.3 (from -r requirements.txt (line 1))
+Collecting pytest==9.2.0 (from -r requirements.txt (line 2))
+Successfully installed iniconfig-2.1.0 packaging-25.0 pluggy-1.6.0 pytest-9.2.0 pyyaml-6.0.3
+##[endgroup]
+##[group]Run pytest --junitxml=junit.xml
+.............FF.....                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ test_c_to_f_freezing_and_boiling _______________________
+
+    def test_c_to_f_freezing_and_boiling():
+>       assert c_to_f(0) == 32
+E       assert 57.6 == 32
+E        +  where 57.6 = c_to_f(0)
+
+tests/test_units.py:7: AssertionError
+____________________________ test_f_to_c_roundtrip _____________________________
+
+    def test_f_to_c_roundtrip():
+        for c in (-40, 0, 21.5, 100):
+>           assert f_to_c(c_to_f(c)) == pytest.approx(c)
+E           assert -25.77777777777778 == -40 ± 4.0e-05
+E             
+E             comparison failed
+E             Obtained: -25.77777777777778
+E             Expected: -40 ± 4.0e-05
+
+tests/test_units.py:13: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_units.py::test_c_to_f_freezing_and_boiling - assert 57.6 == 32
+FAILED tests/test_units.py::test_f_to_c_roundtrip - assert -25.77777777777778...
+2 failed, 18 passed in 0.13s
+##[error]Process completed with exit code 1.
+##[endgroup]

@@ -1,0 +1,24 @@
+run_id: r1001
+repo: evopro-training/telemetry-ingest
+branch: feature/units-refactor
+commit: c79fe68f008f574ef1a057d6fa702f5ec3dfdb5b
+parent: 4e7b6fbe403fb91fe4f32f21982dbc5ea6696fd3
+status: failed
+failed_stage: test
+created_at: '2026-11-05T10:47:00+01:00'
+workflow: ci.yml
+commits:
+- sha: c79fe68f008f574ef1a057d6fa702f5ec3dfdb5b
+  author: Szabó Bence
+  message: 'refactor: simplify temperature conversion'
+  files:
+  - telemetry/units.py
+- sha: 4e7b6fbe403fb91fe4f32f21982dbc5ea6696fd3
+  author: Kovács Anna
+  message: 'feat: pipeline returns alarm list per sensor'
+  files: []
+- sha: 4e57fea4fb92df117984529925e2291c49e7663a
+  author: Nagy Péter
+  message: 'test: cover F->C roundtrip'
+  files: []
+test_history: {}

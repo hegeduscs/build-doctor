@@ -1,0 +1,25 @@
+run_id: r1008
+repo: evopro-training/telemetry-ingest
+branch: chore/startup-logging
+commit: 9d3638201a1c4bd62d781a4008f65890f68d6103
+parent: fd7cdcb827babf2fe098cdc329a7010962c6a390
+status: failed
+failed_stage: test
+created_at: '2026-11-05T08:36:00+01:00'
+workflow: ci.yml
+commits:
+- sha: 9d3638201a1c4bd62d781a4008f65890f68d6103
+  author: Tóth Gergő
+  message: 'chore: log effective settings at startup'
+  files:
+  - config/settings.yaml
+  - telemetry/config.py
+- sha: fd7cdcb827babf2fe098cdc329a7010962c6a390
+  author: Kovács Anna
+  message: 'feat: pipeline returns alarm list per sensor'
+  files: []
+- sha: c1a9decb22d6b3f4a3de3cb84805bbd1126bc6c8
+  author: Nagy Péter
+  message: 'test: cover F->C roundtrip'
+  files: []
+test_history: {}

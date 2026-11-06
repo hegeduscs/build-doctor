@@ -1,0 +1,7 @@
+run_id: r1001
+fixable: true
+category: code_bug
+files:
+- telemetry/units.py
+poisoned: false
+summary: 'c_to_f képlete rossz: (c + 32) * 9/5 a helyes c * 9/5 + 32 helyett'

@@ -1,0 +1,24 @@
+run_id: r1004
+repo: evopro-training/telemetry-ingest
+branch: deps/pyyaml-7
+commit: c940a9e4194bdee337e0b7500f808ae06875938b
+parent: 30a50dd08386cfccc2ca85522fd3827fe526f569
+status: failed
+failed_stage: install
+created_at: '2026-11-05T13:08:00+01:00'
+workflow: ci.yml
+commits:
+- sha: c940a9e4194bdee337e0b7500f808ae06875938b
+  author: dependabot[bot]
+  message: 'build(deps): bump pyyaml from 6.0.3 to 7.0.0'
+  files:
+  - requirements.txt
+- sha: 30a50dd08386cfccc2ca85522fd3827fe526f569
+  author: Kovács Anna
+  message: 'feat: pipeline returns alarm list per sensor'
+  files: []
+- sha: 43a13e3b07fef837efa23788d18ba0121f829383
+  author: Nagy Péter
+  message: 'test: cover F->C roundtrip'
+  files: []
+test_history: {}

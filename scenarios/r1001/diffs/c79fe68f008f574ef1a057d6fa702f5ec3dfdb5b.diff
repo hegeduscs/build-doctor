@@ -1,0 +1,11 @@
+--- a/telemetry/units.py
++++ b/telemetry/units.py
+@@ -3,7 +3,7 @@
+ 
+ def c_to_f(celsius: float) -> float:
+     """Celsius -> Fahrenheit."""
+-    return celsius * 9 / 5 + 32
++    return (celsius + 32) * 9 / 5
+ 
+ 
+ def f_to_c(fahrenheit: float) -> float:

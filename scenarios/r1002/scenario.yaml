@@ -1,0 +1,35 @@
+run_id: r1002
+repo: evopro-training/telemetry-ingest
+branch: main
+commit: 00def4d060df8e0dcd07a82c12cf891da1e6a5fe
+parent: 9a36196a005bac4825a66c6056a0601c816a3125
+status: failed
+failed_stage: test
+created_at: '2026-11-05T11:54:00+01:00'
+workflow: ci.yml
+commits:
+- sha: 00def4d060df8e0dcd07a82c12cf891da1e6a5fe
+  author: Kovács Anna
+  message: 'docs: document batch size setting'
+  files:
+  - README.md
+- sha: 9a36196a005bac4825a66c6056a0601c816a3125
+  author: Kovács Anna
+  message: 'feat: pipeline returns alarm list per sensor'
+  files: []
+- sha: 6c6e2ad3ec1df0327dd8b89277d02c186fd12952
+  author: Nagy Péter
+  message: 'test: cover F->C roundtrip'
+  files: []
+test_history:
+  tests/test_debounce.py::test_debounce_ignores_short_glitch_real_clock:
+  - run_id: r0987
+    result: failed
+  - run_id: r0995
+    result: passed
+  - run_id: r0997
+    result: passed
+  - run_id: r0999
+    result: passed
+  - run_id: r1000
+    result: passed

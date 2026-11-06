@@ -1,0 +1,13 @@
+--- a/tests/test_units.py
++++ b/tests/test_units.py
+@@ -9,8 +9,8 @@
+ 
+ 
+ def test_f_to_c_roundtrip():
+-    for c in (-40, 0, 21.5, 100):
+-        assert f_to_c(c_to_f(c)) == pytest.approx(c)
++    for c in (-40, 0, 21.5, 37.2, 100):
++        assert f_to_c(c_to_f(c)) == c
+ 
+ 
+ def test_kpa_to_bar():

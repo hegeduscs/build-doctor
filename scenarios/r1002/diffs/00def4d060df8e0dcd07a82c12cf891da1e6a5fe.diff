@@ -1,0 +1,8 @@
+--- a/README.md
++++ b/README.md
+@@ -7,3 +7,5 @@
+ pip install -r requirements.txt
+ pytest
+ ```
++
++A `ingest.batch_size` a config/settings.yaml-ban állítható.

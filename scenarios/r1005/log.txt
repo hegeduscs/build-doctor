@@ -1,0 +1,34 @@
+##[group]Run actions/checkout@v4
+Syncing repository: evopro-training/telemetry-ingest
+HEAD is now at 32db95f perf: keep dedupe logic simple and readable
+##[endgroup]
+##[group]Run actions/setup-python@v5
+Successfully set up CPython (3.12.7)
+##[endgroup]
+##[group]Run pip install -r requirements.txt
+Collecting pyyaml==6.0.3 (from -r requirements.txt (line 1))
+Collecting pytest==9.2.0 (from -r requirements.txt (line 2))
+Successfully installed iniconfig-2.1.0 packaging-25.0 pluggy-1.6.0 pytest-9.2.0 pyyaml-6.0.3
+##[endgroup]
+##[group]Run pytest --junitxml=junit.xml
+.......F............                                                     [100%]
+=================================== FAILURES ===================================
+________________________ test_dedupe_performance_budget ________________________
+
+    def test_dedupe_performance_budget():
+        """NFR-07: 8000 mérés deduplikálása legfeljebb 0,5 s."""
+        readings = [Reading(f"S-{i % 50}", 20.0, i) for i in range(8000)]
+        t0 = time.perf_counter()
+        out = dedupe(readings)
+        elapsed = time.perf_counter() - t0
+        assert len(out) == 8000
+>       assert elapsed < 0.5, f"dedupe took {elapsed:.2f}s, budget is 0.5s (NFR-07)"
+E       AssertionError: dedupe took 1.25s, budget is 0.5s (NFR-07)
+E       assert 1.2452963629999658 < 0.5
+
+tests/test_dedup.py:20: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dedup.py::test_dedupe_performance_budget - AssertionError: ...
+1 failed, 19 passed in 1.37s
+##[error]Process completed with exit code 1.
+##[endgroup]

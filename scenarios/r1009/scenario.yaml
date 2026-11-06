@@ -1,0 +1,24 @@
+run_id: r1009
+repo: evopro-training/telemetry-ingest
+branch: test/strict-roundtrip
+commit: e0402e4ec59b4cec1919036d7b20f99ab072b1a7
+parent: 0fd6ed343b55164800e005b0fc3545120d7a63bc
+status: failed
+failed_stage: test
+created_at: '2026-11-05T09:43:00+01:00'
+workflow: ci.yml
+commits:
+- sha: e0402e4ec59b4cec1919036d7b20f99ab072b1a7
+  author: Nagy Péter
+  message: 'test: make F->C roundtrip exact, add body temperature'
+  files:
+  - tests/test_units.py
+- sha: 0fd6ed343b55164800e005b0fc3545120d7a63bc
+  author: Kovács Anna
+  message: 'feat: pipeline returns alarm list per sensor'
+  files: []
+- sha: 02de9a1b740f640812d6da215c43687c00b15fec
+  author: Nagy Péter
+  message: 'test: cover F->C roundtrip'
+  files: []
+test_history: {}

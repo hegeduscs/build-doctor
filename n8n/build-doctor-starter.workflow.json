@@ -1,0 +1,175 @@
+{
+  "name": "Build Doctor – CI hiba triage (starter)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ci-failed",
+        "options": {}
+      },
+      "id": "654384ad-d9e5-406e-8b62-3de884e6aae8",
+      "name": "CI failed webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "2ea5c692-5de9-40be-95e9-0ae58a222801"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8080/diagnose",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ run_id: $json.body.run_id }) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "87f8b99d-228b-445f-91e8-f33353042681",
+      "name": "Build Doctor agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "72ec735b-7ee6-4333-8ecd-d109bc2f2939",
+              "leftValue": "={{ $json.diagnosis.confidence }}",
+              "rightValue": 0.7,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "088e4e45-23fd-454f-8dcf-f54ea6bf55be",
+              "leftValue": "={{ $json.diagnosis.needs_human }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "2348f9bd-3b40-4f30-9be3-3c9a5a26cfde",
+              "leftValue": "={{ $json.diagnosis.security_notes }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "4904cece-2034-40fc-ae24-5cffed4c227f",
+      "name": "Magas bizonyosság, nincs gyanú?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8080/actions/create-issue",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ run_id: $json.diagnosis.run_id, title: '[Build Doctor] ' + $json.diagnosis.category + ': ' + $json.diagnosis.root_cause.slice(0, 80), body: $json.diagnosis.root_cause + '\\n\\nJavaslat: ' + $json.diagnosis.suggested_fix + '\\n\\nBizonyíték: ' + $json.diagnosis.evidence.map(e => e.file + ':' + e.line).join(', ') }) }}",
+        "options": {}
+      },
+      "id": "ed7787d2-e8a5-443e-a12d-c46de639204d",
+      "name": "Issue (automatikus)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8080/actions/create-issue",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ run_id: $json.diagnosis.run_id, title: '[REVIEW] ' + $json.diagnosis.run_id + ' – emberi döntés kell', body: JSON.stringify($json.diagnosis, null, 2) }) }}",
+        "options": {}
+      },
+      "id": "06a64c55-54b1-413b-8bf0-a3219d1897f4",
+      "name": "Review sor",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        120
+      ]
+    }
+  ],
+  "connections": {
+    "CI failed webhook": {
+      "main": [
+        [
+          {
+            "node": "Build Doctor agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Doctor agent": {
+      "main": [
+        [
+          {
+            "node": "Magas bizonyosság, nincs gyanú?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Magas bizonyosság, nincs gyanú?": {
+      "main": [
+        [
+          {
+            "node": "Issue (automatikus)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Review sor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}
